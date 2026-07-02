@@ -329,7 +329,7 @@ export default withMermaid(
               {
                 text: "Sections",
                 collapsed: false,
-                items: [{ text: "net/http", link: "/en/net-tghttp/" }],
+                items: [{ text: "net/http", link: "/en/net-http/" }],
               },
               {
                 text: "In progress",

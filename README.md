@@ -17,7 +17,7 @@ npm install
 npm run docs:dev
 ```
 
-The dev server starts at `http://localhost:5173`.
+The dev server starts at `http://localhost:5173/go-for-backend/`.
 
 **Requirements:** Node.js 18+
 
