@@ -1,16 +1,37 @@
 {
-  "name": "http",
+  "name": "go-for-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Structured material on using Go in backend development, with a focus on the standard library.",
   "main": "index.js",
   "scripts": {
     "docs:dev": "vitepress dev .",
     "docs:build": "vitepress build .",
     "docs:preview": "vitepress preview ."
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "go",
+    "golang",
+    "backend",
+    "backend-development",
+    "net-http",
+    "database-sql",
+    "standard-library",
+    "documentation",
+    "tutorial",
+    "learning",
+    "guide",
+    "course"
+  ],
+  "author": "Kirinyoku",
   "license": "CC-BY-4.0",
+  "homepage": "https://kirinyoku.github.io/go-for-backend/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kirinyoku/go-for-backend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kirinyoku/go-for-backend/issues"
+  },
   "type": "commonjs",
   "devDependencies": {
     "mermaid": "^11.15.0",

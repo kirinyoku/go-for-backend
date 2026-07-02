@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kirinyoku.github.io/learn-backend-in-go/sitemap.xml
+Sitemap: https://kirinyoku.github.io/go-for-backend/sitemap.xml
