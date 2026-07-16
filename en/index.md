@@ -28,7 +28,7 @@ If some of these topics are still completely unfamiliar, it is better to fill th
 
 ## Project Status
 
-The `net/http` section is currently complete in the Russian version. The `database/sql` section is still in progress.
+The `net/http` and `database/sql` sections are now complete in both English and Russian.
 
 I cannot say exactly which sections will come next. The project grows gradually, depending on my interest, available time and ability to keep working on the material.
 

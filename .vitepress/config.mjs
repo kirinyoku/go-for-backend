@@ -1,10 +1,91 @@
 import { defineConfig } from "vitepress";
 import { withMermaid } from "vitepress-plugin-mermaid";
+import { existsSync } from "node:fs";
 
 const siteUrl = "https://kirinyoku.github.io/go-for-backend/";
 const siteTitle = "Go for Backend Development";
 const siteDescription =
   "Structured material on using Go in backend development, with a focus on the standard library.";
+
+const ruDatabaseSqlSections = [
+  {
+    text: "1. Введение",
+    items: [
+      ["1.1 Как устроена работа с SQL-базами", "1. Introduction/1.1 Architecture.md", "intro/architecture"],
+      ["1.2 Подключение к базе данных", "1. Introduction/1.2 Connection.md", "intro/connection"],
+    ],
+  },
+  {
+    text: "2. Запросы и транзакции",
+    items: [
+      ["2.1 Выбор метода выполнения запроса", "2. Queries and Transactions/2.1 Exec Query QueryRow.md", "queries/exec-query-queryrow"],
+      ["2.2 Чтение результатов запроса", "2. Queries and Transactions/2.2 Reading Rows.md", "queries/reading-rows"],
+      ["2.3 Параметризация SQL-запросов", "2. Queries and Transactions/2.3 Query Parameters.md", "queries/query-parameters"],
+      ["2.4 Преобразование SQL-значений в Go-типы", "2. Queries and Transactions/2.4 Scanning Types.md", "queries/scanning-types"],
+      ["2.5 Собственные типы данных", "2. Queries and Transactions/2.5 Custom Data Types.md", "queries/custom-data-types"],
+      ["2.6 Подготовленные запросы", "2. Queries and Transactions/2.6 Prepared Statements.md", "queries/prepared-statements"],
+      ["2.7 Управление транзакциями", "2. Queries and Transactions/2.7 Transactions.md", "queries/transactions"],
+    ],
+  },
+  {
+    text: "3. Соединения",
+    items: [
+      ["3.1 Пул соединений", "3. Connections/3.1 Connection Pool.md", "connections/connection-pool"],
+      ["3.2 Выделенное соединение", "3. Connections/3.2 Dedicated Connection.md", "connections/dedicated-connection"],
+    ],
+  },
+];
+
+const ruDatabaseSqlArticles = ruDatabaseSqlSections
+  .flatMap((section) => section.items)
+  .map(([text, source, route]) => ({
+    text,
+    source: `ru/database-sql/${source}`,
+    route: `ru/database-sql/${route}`,
+  }));
+
+const ruDatabaseSqlRewrites = Object.fromEntries(
+  ruDatabaseSqlArticles.map(({ source, route }) => [source, `${route}.md`]),
+);
+
+const ruDatabaseSqlSidebar = [
+  {
+    text: "Обзор",
+    collapsed: false,
+    items: [{ text: "О разделе", link: "/ru/database-sql/" }],
+  },
+  ...ruDatabaseSqlSections.map((section) => ({
+    text: section.text,
+    collapsed: false,
+    items: section.items.map(([text, , route]) => ({
+      text,
+      link: `/ru/database-sql/${route}`,
+    })),
+  })),
+];
+
+function validateRuDatabaseSqlManifest() {
+  const sources = new Set();
+  const routes = new Set();
+
+  for (const { source, route } of ruDatabaseSqlArticles) {
+    if (sources.has(source) || routes.has(route)) {
+      throw new Error(`Duplicate database/sql manifest entry: ${source} -> ${route}`);
+    }
+    if (!existsSync(new URL(`../${source}`, import.meta.url))) {
+      throw new Error(`Missing database/sql source file: ${source}`);
+    }
+
+    sources.add(source);
+    routes.add(route);
+  }
+
+  if (!existsSync(new URL("../en/database-sql/index.md", import.meta.url))) {
+    throw new Error("Missing English database/sql locale landing page");
+  }
+}
+
+validateRuDatabaseSqlManifest();
 
 function pageUrl(relativePath) {
   const route = relativePath
@@ -21,7 +102,9 @@ export default withMermaid(
     description: siteDescription,
     srcExclude: [
       "README.md",
+      "STYLEGUID.md",
       "STYLEGUIDE.md",
+      "DATABASE_SQL_STRUCTURE.md",
       "DEPLOY_TODO.md",
       "GITHUB_SEO_TODO.md",
     ],
@@ -98,6 +181,29 @@ export default withMermaid(
     },
 
     rewrites: {
+      "en/database-sql/1. Introduction/1.1 Architecture.md":
+        "en/database-sql/intro/architecture.md",
+      "en/database-sql/1. Introduction/1.2 Connection.md":
+        "en/database-sql/intro/connection.md",
+      "en/database-sql/2. Queries and Transactions/2.1 Exec Query QueryRow.md":
+        "en/database-sql/queries/exec-query-queryrow.md",
+      "en/database-sql/2. Queries and Transactions/2.2 Reading Rows.md":
+        "en/database-sql/queries/reading-rows.md",
+      "en/database-sql/2. Queries and Transactions/2.3 Query Parameters.md":
+        "en/database-sql/queries/query-parameters.md",
+      "en/database-sql/2. Queries and Transactions/2.4 Scanning Types.md":
+        "en/database-sql/queries/scanning-types.md",
+      "en/database-sql/2. Queries and Transactions/2.5 Custom Data Types.md":
+        "en/database-sql/queries/custom-data-types.md",
+      "en/database-sql/2. Queries and Transactions/2.6 Prepared Statements.md":
+        "en/database-sql/queries/prepared-statements.md",
+      "en/database-sql/2. Queries and Transactions/2.7 Transactions.md":
+        "en/database-sql/queries/transactions.md",
+      "en/database-sql/3. Connections/3.1 Connection Pool.md":
+        "en/database-sql/connections/connection-pool.md",
+      "en/database-sql/3. Connections/3.2 Dedicated Connection.md":
+        "en/database-sql/connections/dedicated-connection.md",
+
       "en/net-http/1. Introduction/1.1 Connection Lifecycle.md":
         "en/net-http/intro/connection-lifecycle.md",
       "en/net-http/1. Introduction/1.2 Handler.md": "en/net-http/intro/handler.md",
@@ -203,6 +309,8 @@ export default withMermaid(
         "ru/net-http/testing/testing-with-servers.md",
       "ru/http/4. Testing/4.3 Mocking External APIs.md":
         "ru/net-http/testing/mocking-external-apis.md",
+
+      ...ruDatabaseSqlRewrites,
     },
 
     locales: {
@@ -213,6 +321,77 @@ export default withMermaid(
         title: "Go for Backend",
         themeConfig: {
           sidebar: {
+            "/en/database-sql/": [
+              {
+                text: "Overview",
+                collapsed: false,
+                items: [
+                  { text: "About This Section", link: "/en/database-sql/" },
+                ],
+              },
+              {
+                text: "1. Introduction",
+                collapsed: false,
+                items: [
+                  {
+                    text: "1.1 How SQL Database Access Works",
+                    link: "/en/database-sql/intro/architecture",
+                  },
+                  {
+                    text: "1.2 Connecting to a Database",
+                    link: "/en/database-sql/intro/connection",
+                  },
+                ],
+              },
+              {
+                text: "2. Queries and Transactions",
+                collapsed: false,
+                items: [
+                  {
+                    text: "2.1 Choosing a Query Execution Method",
+                    link: "/en/database-sql/queries/exec-query-queryrow",
+                  },
+                  {
+                    text: "2.2 Reading Query Results",
+                    link: "/en/database-sql/queries/reading-rows",
+                  },
+                  {
+                    text: "2.3 Parameterizing SQL Queries",
+                    link: "/en/database-sql/queries/query-parameters",
+                  },
+                  {
+                    text: "2.4 Scanning SQL Values into Go Types",
+                    link: "/en/database-sql/queries/scanning-types",
+                  },
+                  {
+                    text: "2.5 Custom Data Types",
+                    link: "/en/database-sql/queries/custom-data-types",
+                  },
+                  {
+                    text: "2.6 Prepared Statements",
+                    link: "/en/database-sql/queries/prepared-statements",
+                  },
+                  {
+                    text: "2.7 Managing Transactions",
+                    link: "/en/database-sql/queries/transactions",
+                  },
+                ],
+              },
+              {
+                text: "3. Connections",
+                collapsed: false,
+                items: [
+                  {
+                    text: "3.1 Connection Pool",
+                    link: "/en/database-sql/connections/connection-pool",
+                  },
+                  {
+                    text: "3.2 Dedicated Connection",
+                    link: "/en/database-sql/connections/dedicated-connection",
+                  },
+                ],
+              },
+            ],
             "/en/net-http/": [
               {
                 text: "Overview",
@@ -360,12 +539,10 @@ export default withMermaid(
               {
                 text: "Sections",
                 collapsed: false,
-                items: [{ text: "net/http", link: "/en/net-http/" }],
-              },
-              {
-                text: "In progress",
-                collapsed: false,
-                items: [{ text: "database/sql", link: "/en/database-sql/" }],
+                items: [
+                  { text: "net/http", link: "/en/net-http/" },
+                  { text: "database/sql", link: "/en/database-sql/" },
+                ],
               },
             ],
           },
@@ -388,12 +565,8 @@ export default withMermaid(
               {
                 text: "Разделы",
                 collapsed: false,
-                items: [{ text: "net/http", link: "/ru/net-http/" }],
-              },
-              {
-                text: "В разработке",
-                collapsed: false,
                 items: [
+                  { text: "net/http", link: "/ru/net-http/" },
                   { text: "database/sql", link: "/ru/database-sql/" },
                 ],
               },
@@ -541,6 +714,7 @@ export default withMermaid(
                 ],
               },
             ],
+            "/ru/database-sql/": ruDatabaseSqlSidebar,
           },
           outline: {
             label: "На этой странице",
