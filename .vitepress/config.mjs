@@ -101,9 +101,11 @@ export default withMermaid(
     base: "/go-for-backend/",
     description: siteDescription,
     srcExclude: [
+      "archive/**/*.md",
       "README.md",
       "STYLEGUID.md",
       "STYLEGUIDE.md",
+      "todo.md",
       "DATABASE_SQL_STRUCTURE.md",
       "DEPLOY_TODO.md",
       "GITHUB_SEO_TODO.md",
@@ -256,6 +258,29 @@ export default withMermaid(
       "en/net-http/4. Testing/4.3 Mocking External APIs.md":
         "en/net-http/testing/mocking-external-apis.md",
 
+      "en/log-slog/1. Fundamentals/1.1 From Text to Structured Event.md":
+        "en/log-slog/intro/from-text-to-structured-event.md",
+      "en/log-slog/1. Fundamentals/1.2 Logger Configuration.md":
+        "en/log-slog/intro/logger-configuration.md",
+      "en/log-slog/1. Fundamentals/1.3 Attributes and Event Schema.md":
+        "en/log-slog/intro/attributes-and-event-schema.md",
+      "en/log-slog/1. Fundamentals/1.4 Levels and Filtering.md":
+        "en/log-slog/intro/levels-and-filtering.md",
+      "en/log-slog/1. Fundamentals/1.5 Logging Flow.md":
+        "en/log-slog/intro/logging-flow.md",
+      "en/log-slog/2. Attributes and Values/2.1 Common Fields and Derived Loggers.md":
+        "en/log-slog/events/common-fields-and-derived-loggers.md",
+      "en/log-slog/2. Attributes and Values/2.2 Groups and Namespaces.md":
+        "en/log-slog/events/groups-and-namespaces.md",
+      "en/log-slog/2. Attributes and Values/2.3 Custom Values.md":
+        "en/log-slog/events/custom-values.md",
+      "en/log-slog/3. Handlers and Performance/3.1 Built-in Handler Configuration.md":
+        "en/log-slog/advanced/handler-configuration.md",
+      "en/log-slog/3. Handlers and Performance/3.2 Wrappers and Composition.md":
+        "en/log-slog/advanced/wrappers-and-composition.md",
+      "en/log-slog/3. Handlers and Performance/3.3 Custom Handler.md":
+        "en/log-slog/advanced/custom-handler.md",
+
       "ru/http/index.md": "ru/net-http/index.md",
       "ru/http/1. Introduction/1.1 Connection Lifecycle.md":
         "ru/net-http/intro/connection-lifecycle.md",
@@ -309,6 +334,29 @@ export default withMermaid(
         "ru/net-http/testing/testing-with-servers.md",
       "ru/http/4. Testing/4.3 Mocking External APIs.md":
         "ru/net-http/testing/mocking-external-apis.md",
+
+      "ru/log-slog/1. Fundamentals/1.1 From Text to Structured Event.md":
+        "ru/log-slog/intro/from-text-to-structured-event.md",
+      "ru/log-slog/1. Fundamentals/1.2 Logger Configuration.md":
+        "ru/log-slog/intro/logger-configuration.md",
+      "ru/log-slog/1. Fundamentals/1.3 Attributes and Event Schema.md":
+        "ru/log-slog/intro/attributes-and-event-schema.md",
+      "ru/log-slog/1. Fundamentals/1.4 Levels and Filtering.md":
+        "ru/log-slog/intro/levels-and-filtering.md",
+      "ru/log-slog/1. Fundamentals/1.5 Logging Flow.md":
+        "ru/log-slog/intro/logging-flow.md",
+      "ru/log-slog/2. Attributes and Values/2.1 Common Fields and Derived Loggers.md":
+        "ru/log-slog/events/common-fields-and-derived-loggers.md",
+      "ru/log-slog/2. Attributes and Values/2.2 Groups and Namespaces.md":
+        "ru/log-slog/events/groups-and-namespaces.md",
+      "ru/log-slog/2. Attributes and Values/2.3 Custom Values.md":
+        "ru/log-slog/events/custom-values.md",
+      "ru/log-slog/3. Handlers and Performance/3.1 Built-in Handler Configuration.md":
+        "ru/log-slog/advanced/handler-configuration.md",
+      "ru/log-slog/3. Handlers and Performance/3.2 Wrappers and Composition.md":
+        "ru/log-slog/advanced/wrappers-and-composition.md",
+      "ru/log-slog/3. Handlers and Performance/3.3 Custom Handler.md":
+        "ru/log-slog/advanced/custom-handler.md",
 
       ...ruDatabaseSqlRewrites,
     },
@@ -542,6 +590,81 @@ export default withMermaid(
                 items: [
                   { text: "net/http", link: "/en/net-http/" },
                   { text: "database/sql", link: "/en/database-sql/" },
+                  { text: "log/slog", link: "/en/log-slog/" },
+                ],
+              },
+            ],
+            "/en/log-slog/": [
+              {
+                text: "Overview",
+                collapsed: false,
+                items: [
+                  {
+                    text: "Structured Logging",
+                    link: "/en/log-slog/",
+                  },
+                ],
+              },
+              {
+                text: "1. Fundamentals",
+                collapsed: false,
+                items: [
+                  {
+                    text: "1.1 From Text to Structured Event",
+                    link: "/en/log-slog/intro/from-text-to-structured-event",
+                  },
+                  {
+                    text: "1.2 Logger Configuration",
+                    link: "/en/log-slog/intro/logger-configuration",
+                  },
+                  {
+                    text: "1.3 Attributes and Event Schema",
+                    link: "/en/log-slog/intro/attributes-and-event-schema",
+                  },
+                  {
+                    text: "1.4 Levels and Filtering",
+                    link: "/en/log-slog/intro/levels-and-filtering",
+                  },
+                  {
+                    text: "1.5 Logging Flow",
+                    link: "/en/log-slog/intro/logging-flow",
+                  },
+                ],
+              },
+              {
+                text: "2. Attributes and Values",
+                collapsed: false,
+                items: [
+                  {
+                    text: "2.1 Common Fields and Derived Loggers",
+                    link: "/en/log-slog/events/common-fields-and-derived-loggers",
+                  },
+                  {
+                    text: "2.2 Groups and Namespaces",
+                    link: "/en/log-slog/events/groups-and-namespaces",
+                  },
+                  {
+                    text: "2.3 Custom Values",
+                    link: "/en/log-slog/events/custom-values",
+                  },
+                ],
+              },
+              {
+                text: "3. Handlers and Performance",
+                collapsed: false,
+                items: [
+                  {
+                    text: "3.1 Built-in Handler Configuration",
+                    link: "/en/log-slog/advanced/handler-configuration",
+                  },
+                  {
+                    text: "3.2 Wrappers and Composition",
+                    link: "/en/log-slog/advanced/wrappers-and-composition",
+                  },
+                  {
+                    text: "3.3 Custom Handler",
+                    link: "/en/log-slog/advanced/custom-handler",
+                  },
                 ],
               },
             ],
@@ -568,6 +691,10 @@ export default withMermaid(
                 items: [
                   { text: "net/http", link: "/ru/net-http/" },
                   { text: "database/sql", link: "/ru/database-sql/" },
+                  {
+                    text: "log/slog",
+                    link: "/ru/log-slog/",
+                  },
                 ],
               },
             ],
@@ -710,6 +837,80 @@ export default withMermaid(
                   {
                     text: "4.3 Мокирование внешних API",
                     link: "/ru/net-http/testing/mocking-external-apis",
+                  },
+                ],
+              },
+            ],
+            "/ru/log-slog/": [
+              {
+                text: "Обзор",
+                collapsed: false,
+                items: [
+                  {
+                    text: "Структурированное логирование",
+                    link: "/ru/log-slog/",
+                  },
+                ],
+              },
+              {
+                text: "1. Основы",
+                collapsed: false,
+                items: [
+                  {
+                    text: "1.1 От строки к структурированному событию",
+                    link: "/ru/log-slog/intro/from-text-to-structured-event",
+                  },
+                  {
+                    text: "1.2 Создание и настройка логгера",
+                    link: "/ru/log-slog/intro/logger-configuration",
+                  },
+                  {
+                    text: "1.3 Атрибуты и схема событий",
+                    link: "/ru/log-slog/intro/attributes-and-event-schema",
+                  },
+                  {
+                    text: "1.4 Уровни и фильтрация",
+                    link: "/ru/log-slog/intro/levels-and-filtering",
+                  },
+                  {
+                    text: "1.5 Как проходит запись",
+                    link: "/ru/log-slog/intro/logging-flow",
+                  },
+                ],
+              },
+              {
+                text: "2. Атрибуты и значения",
+                collapsed: false,
+                items: [
+                  {
+                    text: "2.1 Общие поля и производные логгеры",
+                    link: "/ru/log-slog/events/common-fields-and-derived-loggers",
+                  },
+                  {
+                    text: "2.2 Группы и пространства имён",
+                    link: "/ru/log-slog/events/groups-and-namespaces",
+                  },
+                  {
+                    text: "2.3 Пользовательские значения",
+                    link: "/ru/log-slog/events/custom-values",
+                  },
+                ],
+              },
+              {
+                text: "3. Обработчики",
+                collapsed: false,
+                items: [
+                  {
+                    text: "3.1 Настройка встроенных обработчиков",
+                    link: "/ru/log-slog/advanced/handler-configuration",
+                  },
+                  {
+                    text: "3.2 Обёртки и композиция обработчиков",
+                    link: "/ru/log-slog/advanced/wrappers-and-composition",
+                  },
+                  {
+                    text: "3.3 Собственный обработчик",
+                    link: "/ru/log-slog/advanced/custom-handler",
                   },
                 ],
               },

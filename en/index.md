@@ -28,7 +28,7 @@ If some of these topics are still completely unfamiliar, it is better to fill th
 
 ## Project Status
 
-The `net/http` and `database/sql` sections are now complete in both English and Russian.
+The sections on the `net/http`, `database/sql`, and `log/slog` packages are now fully complete.
 
 I cannot say exactly which sections will come next. The project grows gradually, depending on my interest, available time and ability to keep working on the material.
 
